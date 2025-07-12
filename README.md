@@ -15,7 +15,13 @@ pip install google-adk litellm
 ## Usage
 Set the appropriate API key and model, then run the tutor:
 ```bash
-export OPENAI_API_KEY=your-key-here  # or DEEPSEEK_API_KEY / GOOGLE_API_KEY
+# For OpenAI models
+export OPENAI_API_KEY=your-openai-key
+# For DeepSeek models
+export DEEPSEEK_API_KEY=your-deepseek-key
+# For Google Gemini models
+export GOOGLE_API_KEY=your-gemini-key
+
 export MODEL_NAME=gpt-3.5-turbo      # or deepseek-chat / gemini-pro
 python python_tutor.py
 ```
