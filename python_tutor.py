@@ -3,9 +3,15 @@ import asyncio
 from google.generativeai import types
 from google.adk.agents.llm_agent import LlmAgent
 from google.adk.artifacts import InMemoryArtifactService
-from google.adk.sessions.in_memory_session_service import InMemorySessionService
-from google.adk.auth.credential_service.in_memory_credential_service import InMemoryCredentialService
+from google.adk.sessions.in_memory_session_service import (
+    InMemorySessionService,
+)
+from google.adk.auth.credential_service.in_memory_credential_service import (
+    InMemoryCredentialService,
+)
 from google.adk.runners import Runner
+from google.adk.models.google_llm import Gemini
+from google.adk.models.lite_llm import LiteLlm
 
 SYSTEM_PROMPT = (
     "你是一个友好的 Python 编程辅导老师，面对的学生是中学生初学者。"
@@ -17,10 +23,14 @@ SYSTEM_PROMPT = (
 
 async def main() -> None:
     model_name = os.environ.get("MODEL_NAME", "gpt-3.5-turbo")
+    if model_name.startswith("gemini"):
+        llm_model = Gemini(model=model_name)
+    else:
+        llm_model = LiteLlm(model=model_name)
     root_agent = LlmAgent(
         name="python_tutor",
         instruction=SYSTEM_PROMPT,
-        model=model_name,
+        model=llm_model,
     )
     artifact_service = InMemoryArtifactService()
     session_service = InMemorySessionService()
