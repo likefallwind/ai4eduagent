@@ -1,6 +1,6 @@
 import os
 import asyncio
-from google.generativeai import types
+from google.genai import types
 from google.adk.agents.llm_agent import LlmAgent
 from google.adk.artifacts import InMemoryArtifactService
 from google.adk.sessions.in_memory_session_service import (
